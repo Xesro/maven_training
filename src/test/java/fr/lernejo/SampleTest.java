@@ -5,6 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 class SampleTest {
 
@@ -22,5 +24,13 @@ class SampleTest {
     void fact() {
         int result = sample.fact(4);
         Assertions.assertThat(result).as("fact de 4").isEqualTo(24);
+    }
+
+    @Test
+    void failFact() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+            sample.fact(-1));
+        Assertions.assertThat(exception.getMessage()).isEqualTo("N should be positive");
+
     }
 }
